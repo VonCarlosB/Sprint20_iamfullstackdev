@@ -11,7 +11,7 @@ const ItemDetailPage = ({item, urlApi}) => {
     fetch( `${urlApi}/id/${item._id}`, {
         method: 'DELETE'
     })
-    location.replace('/')
+    location.replace('https://tasks-front.netlify.app/')
   }
 
   return (
