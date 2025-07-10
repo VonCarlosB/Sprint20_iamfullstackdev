@@ -2,11 +2,13 @@ import { useState } from "react";
 
 const ItemDetailPage = ({item, urlApi}) => {
 
+  const [completed, setCompleted] = useState(item.completed)
+
   const markAsCompleted = () => {
     fetch( `${urlApi}/markascompleted/${item._id}`, {
         method: 'PUT'
     })
-    Window.location.reload()
+    setCompleted(true)
   }
 
   const deleteTask = () => {
@@ -19,9 +21,9 @@ const ItemDetailPage = ({item, urlApi}) => {
   return (
     <>
       <h3>{item.title}</h3>
-      <p>Compled: {`${item.completed}`}</p>
+      <p>Compled: {`${completed}`}</p>
       <button onClick={markAsCompleted}>Mark as completed</button>
-      {item.completed && 
+      {completed && 
         <button onClick={deleteTask}>Delete Task</button>
       }
     </>
