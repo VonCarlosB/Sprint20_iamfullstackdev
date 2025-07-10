@@ -11,10 +11,16 @@ const ItemDetailPage = ({item, urlApi}) => {
     setCompleted(true)
   }
 
-  const deleteTask = () => {
-    fetch( `${urlApi}/id/${item._id}`, {
-        method: 'DELETE'
-    })
+  const deleteTask = async () => {
+    try {
+      const res = await fetch( `${urlApi}/id/${item._id}`, {
+          method: 'DELETE'
+      })
+      if(!res.ok) throw new Error('Could not delete task '+item.title)
+    } catch (error) {
+      console.log(error)
+    }
+    
     location.replace('https://tasks-front.netlify.app/')
   }
 
