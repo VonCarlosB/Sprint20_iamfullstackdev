@@ -4,7 +4,15 @@ const ItemDetailPage = ({item, urlApi}) => {
 
   const [completed, setCompleted] = useState(item.completed)
 
-  const markAsCompleted = () => {
+  const markAsCompleted = async () => {
+    try {
+      const res = await fetch( `${urlApi}/id/${item._id}`, {
+          method: 'DELETE'
+      })
+      if(!res.ok) throw new Error('Could not delete task '+item.title)
+    } catch (error) {
+      console.log(error)
+    }
     fetch( `${urlApi}/markascompleted/${item._id}`, {
         method: 'PUT'
     })
