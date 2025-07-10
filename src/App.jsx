@@ -4,10 +4,10 @@ import Home from './Home.jsx'
 import ItemDetailPage from "./ItemDetailPage.jsx";
 import InputCreate from "./InputCreate.jsx";
 
-
 const App = () => {
   const [data, setData] = useState(null)
-  const urlApi = 'http://localhost:3000'
+  //const urlApi = 'http://localhost:3000'
+  const urlApi = import.meta.env.VITE_APP_API_URL
 
 const fetchData = async () => {
   try {
@@ -36,9 +36,10 @@ useEffect(() => {
           <Routes>
             <Route path="/create" element={<InputCreate url={urlApi}/>} />
             <Route path="/" element={<Home data={data} />} />
-           
             {data.map(item => (
-              <Route key={item._id} path={`/${item._id}`} element={<ItemDetailPage item={item}/>} />
+              <Route key={item._id} path={`/${item._id}`} element={
+                <ItemDetailPage item={item} urlApi={urlApi}/>
+                } />
             ))
             }
           </Routes>

@@ -1,9 +1,27 @@
-const ItemDetailPage = ({item}) => {
+const ItemDetailPage = ({item, urlApi}) => {
+
+  const markAsCompleted = () => {
+    fetch( `${urlApi}/markascompleted/${item._id}`, {
+        method: 'PUT'
+    })
+    location.reload()
+  }
+
+  const deleteTask = () => {
+    fetch( `${urlApi}/id/${item._id}`, {
+        method: 'DELETE'
+    })
+    location.replace('/')
+  }
 
   return (
     <>
       <h3>{item.title}</h3>
       <p>Compled: {`${item.completed}`}</p>
+      <button onClick={markAsCompleted}>Mark as completed</button>
+      {item.completed && 
+        <button onClick={deleteTask}>Delete Task</button>
+      }
     </>
  
   );
