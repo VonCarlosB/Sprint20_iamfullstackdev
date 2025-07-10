@@ -1,10 +1,12 @@
+import { useState } from "react";
+
 const ItemDetailPage = ({item, urlApi}) => {
 
   const markAsCompleted = () => {
     fetch( `${urlApi}/markascompleted/${item._id}`, {
         method: 'PUT'
     })
-    location.reload()
+    Window.location.reload()
   }
 
   const deleteTask = () => {
